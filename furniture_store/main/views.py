@@ -8,20 +8,18 @@ from django.http import HttpRequest, HttpResponse
 class Index(TemplateView):
     template_name = 'main/index.html'
     
-    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Home'
-        context['content'] = 'Главная страцниа магазина Home'
+        context['content'] = 'Магазин мебели HOME'
         return context
     
-
+#Views about 
 class About(TemplateView):
-    template_name = 'main/index.html'
+    template_name = 'main/about.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['title'] = 'О нас'
+        context['content'] = 'Текст о том какой классный этот интернет магазин.'
         return context
-    
-    def get(self, request, *args, **kwargs):
-        return HttpResponse('hello word')
