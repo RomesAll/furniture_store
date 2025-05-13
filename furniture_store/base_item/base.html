@@ -1,4 +1,5 @@
 {% load static %}
+{% load categories %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +31,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container">
-                <a class="navbar-brand" href="index.html">Home</a>
+                <a class="navbar-brand" href="{% url "main:index" %}">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +47,7 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item  text-white" href="#">Доставка и оплата</a></li>
                                 <li><a class="dropdown-item  text-white" href="#">Контактная информация</a></li>
-                                <li><a class="dropdown-item  text-white" href="#">Про нас</a></li>
+                                <li><a class="dropdown-item  text-white" href="{% url "main:about" %}">Про нас</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -64,7 +65,7 @@
                                 <li><a class="dropdown-item  text-white" href="carts/cart.html">Корзина</a></li>
                                 <li><a class="dropdown-item  text-white" href="users/profile.html">Личный кабинет</a>
                                 </li>
-                                <li><a class="dropdown-item  text-white" href="#">Админ панель</a></li>
+                                <li><a class="dropdown-item  text-white" href="{% url 'admin:index' %}">Админ панель</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -93,13 +94,11 @@
                             height="16">
                     </button>
                     <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Все товары</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Кухня</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Спальня</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Гостинная</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Офис</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Фурнитура</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Декор</a></li>
+                        
+                        {% get_categories as cat_tags %}
+                        {% for cat in cat_tags %} 
+                            <li><a class="dropdown-item text-white" href="{% url "goods:catalog" cat.slug %}">{{cat.name}}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <!-- Значек корзины, вызывает модальное окно -->
@@ -190,11 +189,6 @@
             </div>
         </div>
     </section>
-    <footer class="py-4 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Home Python Hub Studio 2023</p>
-        </div>
-    </footer>
     <script src="{% static "main/deps/js/jquery/jquery-3.7.0.min.js" %}"></script>
     <script src="{% static "main/deps/js/jquery-events.js" %}"></script>
     <script src="{% static "main/deps/js/jquery-ajax.js" %}"></script>

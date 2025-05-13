@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views import View
 from django.http import HttpRequest, HttpResponse
-
+from goods.models import Categories, Product
 
 # Create your views here.
 class Index(TemplateView):
@@ -13,6 +13,7 @@ class Index(TemplateView):
         context['title'] = 'Home'
         context['content'] = 'Магазин мебели HOME'
         return context
+
     
 #Views about 
 class About(TemplateView):
